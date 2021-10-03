@@ -15,7 +15,7 @@ const data = [
         id: "456",
         title: "入桌",
         image:"https://links.papareact.com/28w",
-        screen: "TableScreen"
+        screen: "TableNavi"
     },
 ]
 

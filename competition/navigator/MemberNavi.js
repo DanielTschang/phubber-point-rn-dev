@@ -3,8 +3,8 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LoginScreen from '../components/MemberScreens/sign/LoginScreen';
-import SignUpScreen from '../components/MemberScreens/sign/SignUpScreen';
+import LoginScreen from '../components/MemberScreens/Sign/LoginScreen';
+import SignUpScreen from '../components/MemberScreens/Sign/SignUpScreen';
 
 import FeatureHomeScreen from '../components/MemberScreens/features/FeatureHomeScreen';
 import ChangeInfoScreens from '../components/MemberScreens/features/ChangeInfoScreen'
