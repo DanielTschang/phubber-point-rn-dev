@@ -2,25 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setIsSignIn, setMemberID, setMemberName, setMemberPoint, setMemberPwd } from '../../../redux/slices/memberSlice';
+import { setMemberAccount ,setIsSignIn, setMemberID, setMemberName, setMemberPoint, setMemberPwd } from '../../../redux/slices/memberSlice';
 
 
 
 
 export default function LoginScreen({navigation}) {
-    const [username, setUsername] = useState('')
+    const [account, setAccount] = useState('')
     const [password, setPassword] = useState('')
 
     const dispatch = useDispatch();
     
 
-    function SignIn(username, password){
+    function SignIn(account, password){
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         
         var raw = JSON.stringify({
-          "account": username,
+          "account": account,
           "pwd": password
         });
         
@@ -33,12 +33,12 @@ export default function LoginScreen({navigation}) {
         
         fetch("https://phubber-point.herokuapp.com/member/login/", requestOptions)
           .then(response => response.json())
-          .then(result => {console.log(result.point)
-            console.log(typeof result.point)
-            if((typeof result.point) == 'number'){
-                dispatch(setMemberID(username))
+          .then(result => {
+            if((result.message) === 'success'){
+                dispatch(setMemberAccount(account))
+                dispatch(setMemberID(result.member_id))
                 dispatch(setMemberPwd(password))
-                dispatch(setMemberName('New YoYoman'))
+                dispatch(setMemberName(result.last_name + ' '+ result.first_name))
                 dispatch(setIsSignIn(true))
                 dispatch(setMemberPoint(result.point))
                 navigation.navigate('Member')
@@ -46,7 +46,6 @@ export default function LoginScreen({navigation}) {
           })
           .catch(
             error => {console.log('error', error);
-                      console.log('AAA');
           });
     }
 
@@ -56,8 +55,8 @@ export default function LoginScreen({navigation}) {
             <Text>請輸入email/手機號碼</Text>
             <TextInput
                 placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
+                value={account}
+                onChangeText={setAccount}
                 autoCapitalize='none'
             />
             <TextInput
@@ -67,7 +66,7 @@ export default function LoginScreen({navigation}) {
                 autoCapitalize='none'
                 secureTextEntry
             />
-            <Button title="Sign in" onPress={() => SignIn(username, password)} />
+            <Button title="Sign in" onPress={() => SignIn(account, password)} />
             <Button
             title="Sign Up"
             onPress={() => navigation.navigate("SignUp")} // We added an onPress event which would navigate to the About screen

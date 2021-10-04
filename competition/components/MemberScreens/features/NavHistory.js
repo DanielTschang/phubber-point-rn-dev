@@ -9,6 +9,7 @@ import tw from 'tailwind-react-native-classnames'
 const NavHistory = () => {
     const [historydata, setHistoryData] = useState([])
     const [threshold, setThreshold] = useState(0)
+    const memberid = useSelector(selectMemberID)
     
 
 
@@ -19,7 +20,6 @@ const NavHistory = () => {
             redirect: 'follow'
         };
         
-        let memberid = "3"
         let url = "https://phubber-point.herokuapp.com/member/record/" + memberid
         
         fetch(url, requestOptions)

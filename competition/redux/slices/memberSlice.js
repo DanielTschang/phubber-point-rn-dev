@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isInTable:false,
     isSignIn:false,
+    memberaccount:null,
     memberID:null,
     memberName:null,
     memberPoint:null,
@@ -13,6 +14,9 @@ export const memberSlice = createSlice({
     name:'member',
     initialState,
     reducers:{
+        setMemberAccount:(state, action)=>{
+            state.memberaccount = action.payload;
+        },
         setIsInTable:(state, action)=>{
             state.isInTable = action.payload;
         },
@@ -34,11 +38,12 @@ export const memberSlice = createSlice({
     },
 });
 
-export const { setIsInTable ,setIsSignIn , setMemberID, setMemberName, setMemberPoint, setMemberPwd} = 
+export const { setMemberAccount ,setIsInTable ,setIsSignIn , setMemberID, setMemberName, setMemberPoint, setMemberPwd} = 
     memberSlice.actions;
 
 // Selectors
-export const selectIsInTable = (state) => state.member.isInTable
+export const selectMemberAccount = (state) => state.member.memberaccount;
+export const selectIsInTable = (state) => state.member.isInTable;
 export const selectIsSignIn = (state) => state.member.isSignIn;
 export const selectMemberID = (state) => state.member.memberID;
 export const selectMemberName = (state) => state.member.memberName;

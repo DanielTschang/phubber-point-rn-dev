@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,27 +7,36 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsSignIn } from '../../../redux/slices/memberSlice';
-import { selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '../../../redux/slices/memberSlice';
+import { selectMemberAccount ,selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '../../../redux/slices/memberSlice';
 
 const Stack = createNativeStackNavigator();
 
-async function CheckTableState(){
-    //CallAPi 
-    let tablestate=true;
-    console.log('TableStateCheck')
-    
-    tablestate ? dispatch(setIsInTable(true)): dispatch(setIsInTable(false));
-}
-
 export default function TableNavi() {
     const dispatch = useDispatch();
-    const username = useSelector(selectMemberID);
-    const pwd = useSelector(selectMemberPwd);
+    const [tablestate, setTableState] = useState(false)
+    const member_id = useSelector(selectMemberID);
+
+    async function CheckTableState(){
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        let url = "https://phubber-point.herokuapp.com/table/intable/" + member_id
+        
+        fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            setTableState(boolean(result.message))
+        })
+        .catch(error => console.log('error', error));
+        
+        tablestate ? dispatch(setIsInTable(true)): dispatch(setIsInTable(false));
+    }
 
     CheckTableState();
     
     return (
-        
         useSelector(selectIsInTable) == true ? (
             <View>
                 <Text>yoyo</Text>
