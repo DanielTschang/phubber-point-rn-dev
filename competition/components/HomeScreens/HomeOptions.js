@@ -17,6 +17,12 @@ const data = [
         image:"https://links.papareact.com/28w",
         screen: "TableNavi"
     },
+    {
+        id: "4526",
+        title: "detail",
+        image:"https://links.papareact.com/28w",
+        screen: "Detail"
+    },
 ]
 
 const HomeOptions = () => {
