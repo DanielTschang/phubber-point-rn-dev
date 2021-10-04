@@ -6,45 +6,6 @@ import { Icon } from 'react-native-elements/dist/icons/Icon'
 import { selectMemberID ,selectIsSignIn, selectMemberName, selectMemberPoint, selectMemberPwd, setMemberName, setMemberPoint } from '../../../redux/slices/memberSlice';
 import tw from 'tailwind-react-native-classnames'
 
-const data = 
-[
-    {
-        id:"123",
-        Time:"08/19, 17:54 - 20:20",
-        Point:"58"
-    },
-    {
-        id:"456",
-        Time:"08/29, 12:31 - 19:19",
-        Point:"61"
-    },
-    {
-        id:"4563",
-        Time:"08/29, 12:31 - 12:45",
-        Point:"61"
-    },
-    {
-        id:"4561",
-        Time:"08/29, 12:31",
-        Point:"61"
-    },
-    {
-        id:"4562",
-        Time:"08/29, 12:31",
-        Point:"61"
-    },
-    {
-        id:"4566",
-        Time:"08/29, 12:31",
-        Point:"61"
-    },
-    {
-        id:"4586",
-        Time:"08/29, 12:31",
-        Point:"61"
-    },
-]
-
 const NavHistory = () => {
 
     const [historydata, setHistoryData] = useState(null)
@@ -71,21 +32,21 @@ const NavHistory = () => {
         
         fetch("https://phubber-point.herokuapp.com/member/login/", requestOptions)
           .then(response => response.json())
-          .then(result => {console.log(result.point)
-            console.log(typeof result.point)
-            if(result.message == 'success'){
-              setHistoryData(result.data);
+          .then(result => {
+            if(result.message == 'ok!'){
+              setHistoryData(result.record);
             }
           })
           .catch(error => console.log('error', error));
     }
     
-    // GetHistory();
-
+    
+    GetHistory();
     const navigation = useNavigation();
         return (
+            historydata == null ? (
             <FlatList
-                data={data}
+                data={historydata}
                 keyExtractor={(item)=>item.id}
                 renderItem={({item})=>(
                     <View
@@ -98,6 +59,10 @@ const NavHistory = () => {
                     </View>
                 )}
             />
+        ) : (
+            <View><Text>nono</Text></View>
+        )
+        
         )
 }
 

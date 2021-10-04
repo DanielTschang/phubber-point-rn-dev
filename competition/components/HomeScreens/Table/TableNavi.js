@@ -11,38 +11,32 @@ import { selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '
 
 const Stack = createNativeStackNavigator();
 
+async function CheckTableState(){
+    //CallAPi 
+    let tablestate=true;
+    console.log('TableStateCheck')
+    
+    tablestate ? dispatch(setIsInTable(true)): dispatch(setIsInTable(false));
+}
 
 export default function TableNavi() {
     const dispatch = useDispatch();
     const username = useSelector(selectMemberID);
     const pwd = useSelector(selectMemberPwd);
+
+    CheckTableState();
     
-
-    async function CheckTableState(){
-        let tablestate=true;
-        //CallAPi 
-        
-        tablestate ? dispatch(setIsInTable(true)): dispatch(setIsInTable(false));
-    }
-    CheckTableState()
-
     return (
-
+        
         useSelector(selectIsInTable) == true ? (
-
-
             <View>
                 <Text>yoyo</Text>
             </View>
-
         ) : (
-
             <View>
                 <Text>yoyo111</Text>
             </View>
-
         )
-
   );
 }
 

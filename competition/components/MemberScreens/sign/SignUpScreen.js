@@ -39,7 +39,7 @@ export default function SignUpScreen({navigation}) {
             redirect: 'follow'
             };
             
-            fetch("https://phubber-point.herokuapp.com/member/login/", requestOptions)
+            fetch("https://phubber-point.herokuapp.com/member/account/", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result.message)

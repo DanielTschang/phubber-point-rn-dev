@@ -44,7 +44,10 @@ export default function LoginScreen({navigation}) {
                 navigation.navigate('Member')
             }
           })
-          .catch(error => console.log('error', error));
+          .catch(
+            error => {console.log('error', error);
+                      console.log('AAA');
+          });
     }
 
     return (
