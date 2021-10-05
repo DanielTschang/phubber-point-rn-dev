@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    tableid:null;
+    tableid:'table1',
     screenstate:'active',
     isInTable:false,
     isSignIn:false,

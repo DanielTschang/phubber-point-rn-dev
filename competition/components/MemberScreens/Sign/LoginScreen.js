@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';

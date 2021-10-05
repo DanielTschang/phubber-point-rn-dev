@@ -7,6 +7,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsSignIn } from '../../../redux/slices/memberSlice';
 import { selectMemberAccount ,selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '../../../redux/slices/memberSlice';
+import TableIn from './TableIn';
+import CheckOutScreen from './checkout';
+import TableNotIn from './TableNotIn';
+import barcode from './barcodecanner';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +19,7 @@ export default function TableNavi() {
     const member_id = useSelector(selectMemberID);
 
     async function CheckTableState(){
+        // dispatch(setIsInTable(true))
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
@@ -25,7 +30,7 @@ export default function TableNavi() {
         fetch(url, requestOptions)
         .then(response => response.json())
         .then(result => {
-            dispatch(setIsInTable(boolean(result.message)));
+            dispatch(setIsInTable(result.message));
         })
         .catch(error => console.log('error', error));
         
@@ -37,13 +42,12 @@ export default function TableNavi() {
         <Stack.Navigator>
             {useSelector(selectIsInTable) == true ? (
                 <>
-                    <Stack.Screen component={}/>
-                    <Stack.Screen component={}/>
+                    <Stack.Screen name="Tablein"  component={TableIn}/>
+                    <Stack.Screen name="CheckOut" component={CheckOutScreen}/>
                 </>
             ) : (
                 <>
-                    <Stack.Screen component={}/>
-                    <Stack.Screen component={}/>
+                    <Stack.Screen name="barcode" component={barcode}/>
                 </>
             )}
         </Stack.Navigator>

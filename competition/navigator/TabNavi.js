@@ -40,7 +40,9 @@ export default function TabNavi() {
             
         appState.current = nextAppState;
         console.log(appState.current)
-        dispatch(setScreenState(appState.current))
+        if(appState.current!='background'){
+          dispatch(setScreenState(appState.current))
+        }
       };
     
     
