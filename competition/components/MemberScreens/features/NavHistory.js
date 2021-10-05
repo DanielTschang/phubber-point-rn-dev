@@ -12,7 +12,6 @@ const NavHistory = () => {
     const memberid = useSelector(selectMemberID)
     
 
-
     function GetHistory(){
 
         var requestOptions = {

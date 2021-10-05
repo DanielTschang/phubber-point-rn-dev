@@ -10,15 +10,12 @@ import { store } from './store'
 import { useDispatch } from 'react-redux';
 
 export default function App() {
-  
 
   return (
     <Provider store={store}>
-
         <NavigationContainer>
           <TabNavi/>
-        </NavigationContainer>
-      
+        </NavigationContainer> 
     </Provider>
     );
 }
