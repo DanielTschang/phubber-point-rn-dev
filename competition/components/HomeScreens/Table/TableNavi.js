@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity, Button } from 'react-native'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -15,6 +16,7 @@ export default function TableNavi() {
     const dispatch = useDispatch();
     const [tablestate, setTableState] = useState(false)
     const member_id = useSelector(selectMemberID);
+    const [statehistory, setStateHistory] = useState([])
 
     async function CheckTableState(){
         var requestOptions = {
@@ -34,18 +36,40 @@ export default function TableNavi() {
         tablestate ? dispatch(setIsInTable(true)): dispatch(setIsInTable(false));
     }
 
+    async function UpdateCurrentState(){
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch("https://phubber-point.herokuapp.com/table/state/", requestOptions) + member_id
+            .then(response => response.json())
+            .then(result => {result.data})
+            .catch(error => console.log('error', error));
+    }
+
     CheckTableState();
     
     return (
-        useSelector(selectIsInTable) == true ? (
-            <View>
-                <Text>yoyo</Text>
-            </View>
-        ) : (
-            <View>
-                <Text>yoyo111</Text>
-            </View>
-        )
+        <Stack.Screen>
+            {useSelector(selectIsInTable) == true ? (
+                <>
+                    {setInterval(UpdateCurrentState(), 3000)}
+                    <View>
+                        
+                    </View>
+                </>
+            ) : (
+                <>
+                    <View>
+                        <Text>尚未入桌，請跟櫃檯人員確認是否已分配座位給您
+                        </Text>
+                        <Button title='QR code' onPress={()=>{}}/>
+                        <Button title='refresh' onPress={()=>CheckTableState()} />
+                    </View>
+                </>
+            )}
+        </Stack.Screen>
   );
 }
 

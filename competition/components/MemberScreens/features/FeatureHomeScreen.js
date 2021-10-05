@@ -32,10 +32,9 @@ const FeatureHomeScreen = ({navigation}) => {
         
         fetch("https://phubber-point.herokuapp.com/member/login/", requestOptions)
           .then(response => response.json())
-          .then(result => {console.log(result.point)
-            console.log(typeof result.point)
-            if((typeof result.point) == 'number'){
-                dispatch(setMemberName('New YoYoman'))
+          .then(result => {
+            if(result.message == 'success'){
+                dispatch(setMemberName(result.last_name + ' ' + result.first_name))
                 dispatch(setMemberPoint(result.point))
             }
           })
@@ -43,7 +42,6 @@ const FeatureHomeScreen = ({navigation}) => {
     }
     
 
-    
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

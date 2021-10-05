@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    screenstate:'active',
     isInTable:false,
     isSignIn:false,
     memberaccount:null,
@@ -14,6 +15,9 @@ export const memberSlice = createSlice({
     name:'member',
     initialState,
     reducers:{
+        setScreenState:(state, action)=>{
+            state.screenstate = action.payload;
+        },
         setMemberAccount:(state, action)=>{
             state.memberaccount = action.payload;
         },
@@ -38,10 +42,11 @@ export const memberSlice = createSlice({
     },
 });
 
-export const { setMemberAccount ,setIsInTable ,setIsSignIn , setMemberID, setMemberName, setMemberPoint, setMemberPwd} = 
+export const { setScreenState ,setMemberAccount ,setIsInTable ,setIsSignIn , setMemberID, setMemberName, setMemberPoint, setMemberPwd} = 
     memberSlice.actions;
 
 // Selectors
+export const selectScreenState = (state) => state.member.screenstate;
 export const selectMemberAccount = (state) => state.member.memberaccount;
 export const selectIsInTable = (state) => state.member.isInTable;
 export const selectIsSignIn = (state) => state.member.isSignIn;
