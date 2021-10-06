@@ -3,6 +3,9 @@ import { AppState, StyleSheet, Safe } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useDispatch } from 'react-redux'
 
+import { Icon } from 'react-native-elements/dist/icons/Icon'
+import tw from 'tailwind-react-native-classnames'
+
 import HomeStackNavi from './HomeStackNavi';
 import MemberNavi from './MemberNavi';
 import { setScreenState } from '../redux/slices/memberSlice';
@@ -24,19 +27,7 @@ export default function TabNavi() {
       }, []);
   
         const _handleAppStateChange = (nextAppState) => {
-            // if(nextAppState == 'inactive'){
-            //     console.log(new Date());
-            //     setFirstTime(new Date());
-            // }
-            // if(nextAppState == 'background'){
-            //     console.log(new Date());
-            //     setSecondTime(new Date());
-            //     console.log(secondtime-firsttime)
-            // }
-            // if(nextAppState == 'active'){
-            //     setFirstTime(null)
-            //     setSecondTime(null)
-            // }
+
             
         appState.current = nextAppState;
         console.log(appState.current)
@@ -45,15 +36,39 @@ export default function TabNavi() {
         }
       };
     
-    
+
     return (
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'HomeNav') {
+              iconName = focused
+                ? 'appstore1'
+                : 'appstore-o';
+            } else if (route.name === 'Member') {
+              iconName = focused ? 'smileo' : 'meh';
+            }
+
+            // You can return any component that you like here!
+            return <Icon
+            name={iconName} color={color} size={size} type='antdesign'/>;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}>
             <Tab.Screen name="HomeNav" component={HomeStackNavi} options={{headerShown:false}} />
             <Tab.Screen name="Member" component={MemberNavi} options={{headerShown:false}} />
         </Tab.Navigator>
   );
 }
 
+
+const styles = StyleSheet.create({
+  icon:{
+    width:40,
+  },
+})
 
 
 

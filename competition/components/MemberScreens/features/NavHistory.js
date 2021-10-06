@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements/dist/icons/Icon'
@@ -7,12 +7,11 @@ import { selectMemberID ,selectIsSignIn, selectMemberName, selectMemberPoint, se
 import tw from 'tailwind-react-native-classnames'
 
 const NavHistory = () => {
-    const [historydata, setHistoryData] = useState([])
-    const [threshold, setThreshold] = useState(0)
+    const [historydata, setHistoryData] = useState(null)
     const memberid = useSelector(selectMemberID)
     
 
-    function GetHistory(){
+    const GetHistory=()=>{
 
         var requestOptions = {
             method: 'GET',
@@ -24,29 +23,28 @@ const NavHistory = () => {
         fetch(url, requestOptions)
         .then(response => response.json())
         .then(result => {
-            console.log('aaaa', typeof result.record)
             setHistoryData(result.record)
         })
         .catch(error => console.log('error', error));
-        
-        setThreshold(1)
     }
-    if(threshold==0){
-        GetHistory();
-    }
+
+    useEffect(()=>{
+        console.log('loading')
+        GetHistory()
+    },[]);
 
     return (
         historydata != null ? (
         <FlatList
             data={historydata}
-            keyExtractor={(item)=>item.id}
+            keyExtractor={(item)=>item.id.toString()}
             renderItem={({item})=>(
                 <View
                 onPress={()=>{}}
-                style={tw`p-0 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-60`}>
+                style={tw`p-0 pl-4 pb-8 pt-4 bg-gray-200 m-2 w-60`}>
                     <View>
                         <Text style={tw`mt-2 text-lg font-semibold`}>{item.Time}</Text>
-                        <Text style={tw`mt-2 text-lg font-semibold`}>{item.Point} 點</Text>
+                        <Text style={tw`mt-2 w-20 pl-4 text-lg font-semibold bg-gray-400`}>{item.Point} 點</Text>
                     </View>
                 </View>
             )}
@@ -58,6 +56,5 @@ const NavHistory = () => {
     )
 }
 
-export default NavHistory
 
-const styles = StyleSheet.create({})
+export default NavHistory

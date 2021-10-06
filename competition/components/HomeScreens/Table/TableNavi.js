@@ -1,60 +1,64 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsSignIn } from '../../../redux/slices/memberSlice';
+import { selectIsSignIn, selectTableID } from '../../../redux/slices/memberSlice';
 import { selectMemberAccount ,selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '../../../redux/slices/memberSlice';
 import TableIn from './TableIn';
 import CheckOutScreen from './checkout';
 import TableNotIn from './TableNotIn';
-import barcode from './barcodecanner';
+
+import Detail from '../Detail';
+import { Tab } from 'react-native-elements/dist/tab/Tab';
+
+import TableFirst from './TableFirst';
+import { useNavigation } from '@react-navigation/core';
+import { View } from 'react-native';
+
+const Get_requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+};
+
 
 const Stack = createNativeStackNavigator();
 
-export default function TableNavi() {
+const TableNavi=()=> {
+    const InTable = useSelector(selectIsInTable);
+    const MemberID = useSelector(selectMemberID);
     const dispatch = useDispatch();
-    const member_id = useSelector(selectMemberID);
+    const navigation = useNavigation()
 
+    //set InTable
     async function CheckTableState(){
-        // dispatch(setIsInTable(true))
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
-
-        let url = "https://phubber-point.herokuapp.com/table/intable/" + member_id
+        let url = "https://phubber-point.herokuapp.com/table/intable/" + MemberID
         
-        fetch(url, requestOptions)
+        fetch(url, Get_requestOptions)
         .then(response => response.json())
         .then(result => {
+            console.log('checktableState : ')
+            console.log(result.message)
             dispatch(setIsInTable(result.message));
         })
         .catch(error => console.log('error', error));
         
     }
 
-    CheckTableState();
+    useEffect(()=>{
+        CheckTableState();
+        InTable == true ? navigation.navigate('TableIn') : navigation.navigate('TableNotIn')
+    },[])
+
     
-    return (
-        <Stack.Navigator>
-            {useSelector(selectIsInTable) == true ? (
-                <>
-                    <Stack.Screen name="Tablein"  component={TableIn}/>
-                    <Stack.Screen name="CheckOut" component={CheckOutScreen}/>
-                </>
-            ) : (
-                <>
-                    <Stack.Screen name="barcode" component={barcode}/>
-                </>
-            )}
-        </Stack.Navigator>
-  );
+
+    return(
+         <View></View>           
+    )
 }
 
-
+export default TableNavi
 
 
 

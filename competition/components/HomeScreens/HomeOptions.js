@@ -9,7 +9,7 @@ const data = [
         id: "123",
         title: "Meau",
         image:"https://links.papareact.com/28w",
-        screen: "MeauScreen"
+        screen: "Menu"
     },
     {
         id: "456",

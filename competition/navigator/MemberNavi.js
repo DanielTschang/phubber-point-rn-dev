@@ -3,8 +3,8 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LoginScreen from '../components/MemberScreens/Sign/LoginScreen';
-import SignUpScreen from '../components/MemberScreens/Sign/SignUpScreen';
+import LoginScreen from '../components/MemberScreens/sign/LoginScreen';
+import SignUpScreen from '../components/MemberScreens/sign/SignUpScreen';
 
 import FeatureHomeScreen from '../components/MemberScreens/features/FeatureHomeScreen';
 import ChangeInfoScreens from '../components/MemberScreens/features/ChangeInfoScreen'
@@ -19,9 +19,9 @@ export default function MemberNavi() {
         <Stack.Navigator>
             {useSelector(selectIsSignIn) == true ? (
                 <>
-                <Stack.Screen name="FeatureHome" component={FeatureHomeScreen} />
-                <Stack.Screen name="ChangeInfo" component={ChangeInfoScreens} />
-                <Stack.Screen name="History" component={HistoryScreen}/>
+                <Stack.Screen name="FeatureHome" component={FeatureHomeScreen} options={{headerShown:false}}/>
+                <Stack.Screen name="ChangeInfo" component={ChangeInfoScreens} options={{headerShown:false}}/>
+                <Stack.Screen name="History" component={HistoryScreen} options={{headerShown:false}}/>
                 </>
             ) : (
                 <>

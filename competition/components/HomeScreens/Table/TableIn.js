@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity, Button } from 'react-native'
+import { Image, StyleSheet, Text, SafeAreaView, Button } from 'react-native'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -45,12 +45,12 @@ const TableIn = ({navigation}) => {
     }, [screen])
 
     return(
-        <View>
+        <SafeAreaView>
             <Text>
                 Hello, {useSelector(selectMemberName)};
             </Text>
             <Button title="結帳" onPress={()=>navigation.navigate('CheckOut')} />
-        </View>
+        </SafeAreaView>
     )
 }
 
