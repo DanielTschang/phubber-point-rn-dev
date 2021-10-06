@@ -17,7 +17,8 @@ export default function CheckOutScreen() {
   const [pointgained, setPointGained] = useState(-1)
   const member_id = useSelector(selectMemberID)
 
-  async function checkout(){
+  async function checkout(){  
+    
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
