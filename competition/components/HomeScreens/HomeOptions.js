@@ -30,6 +30,7 @@ const HomeOptions = () => {
     const navigation = useNavigation();
     return (
         <FlatList
+            style={{marginLeft:100}}
             data={data}
             horizontal
             keyExtractor={(item)=>item.id}

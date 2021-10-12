@@ -5,19 +5,26 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavi from './navigator/TabNavi';
 import HomeStackNavi from './navigator/HomeStackNavi'
 import { Provider, useDispatch } from 'react-redux'
-import { store } from './store'
-
-import useAppState from 'react-native-appstate-hook';
+import { store } from './store';
 
 
+import LoginScreenTwo from './components/MemberScreens/sign/LoginScreen2';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RootStackScreen from './components/RootLoginScreen/SignRootStackScreen';
+import RootNavigator from './navigator/RootNavi';
+
+const Stack = createNativeStackNavigator();
 export default function App() {
 
     return (
       <Provider store={store}>
-          <NavigationContainer>
-            <TabNavi/>
-          </NavigationContainer> 
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Root">
+            <Stack.Screen name="Root" component={RootNavigator} options={{headerShown:false}}/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
+          
       );
 }
 
@@ -32,8 +39,10 @@ const styles = StyleSheet.create({
 
 
 
-      // <NavigationContainer>
-      //   <TabNavi/>
-      // </NavigationContainer> 
 
-
+      // <Provider store={store}>
+      //     <NavigationContainer>
+      //       <TabNavi/>
+            
+      //     </NavigationContainer> 
+      // </Provider>
