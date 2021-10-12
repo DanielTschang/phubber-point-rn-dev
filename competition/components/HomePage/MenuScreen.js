@@ -1,12 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Icon } from 'react-native-elements/dist/icons/Icon'
-import { Text, SafeAreaView, ImageBackground, View, StyleSheet, TextInput, FlatList, Image } from 'react-native';
+import { View, StyleSheet, FlatList} from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectMemberName } from '../../redux/slices/memberSlice';
 import * as Animatable from 'react-native-animatable';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { BackgroundImage } from 'react-native-elements/dist/config';
+
 
 const data = [
     {

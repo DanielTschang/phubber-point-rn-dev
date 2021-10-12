@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { View, Text, Dimensions, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements/dist/icons/Icon'

@@ -1,11 +1,9 @@
-import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { Icon } from 'react-native-elements/dist/icons/Icon'
-import { selectMemberID ,selectIsSignIn, selectMemberName, selectMemberPoint, selectMemberPwd, setMemberName, setMemberPoint } from '../../redux/slices/memberSlice';
-import tw from 'tailwind-react-native-classnames'
-import { marginTop } from 'styled-system'
+import { useSelector } from 'react-redux'
+import { Text, View, FlatList } from 'react-native'
+
+import { selectMemberID ,selectMemberPoint} from '../../redux/slices/memberSlice';
+
 import { StatusBar } from 'expo-status-bar'
 
 const HistoryList = () => {

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Text, View, Button, SafeAreaView, FlatList, Image } from 'react-native';
+import React from 'react';
+import { Text, View, FlatList, Image } from 'react-native';
 
 
 const data = [

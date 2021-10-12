@@ -1,14 +1,10 @@
 
 import React, { useEffect } from 'react';
-import { Text, view } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsSignIn, selectTableID } from '../../../redux/slices/memberSlice';
-import { selectMemberAccount ,selectIsInTable, selectMemberID, selectMemberPwd, setIsInTable } from '../../../redux/slices/memberSlice';
+import { selectIsInTable, selectMemberID, setIsInTable } from '../../../redux/slices/memberSlice';
 
-import { useNavigation } from '@react-navigation/core';
-import { View } from 'react-native';
 import TableIn from './TableInScreen';
 import TableCheckOutScreen from './TableCheckOutScreen';
 import TableNotIn from './TableNotInScreen';

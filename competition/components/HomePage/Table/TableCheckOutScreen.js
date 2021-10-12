@@ -1,9 +1,9 @@
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMemberID, setCheckOut,setTableID, setIsInTable } from '../../../redux/slices/memberSlice';
+import { selectMemberID, setTableID } from '../../../redux/slices/memberSlice';
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, SafeAreaView, Button, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements/dist/icons/Icon'

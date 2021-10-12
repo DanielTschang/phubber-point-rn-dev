@@ -1,13 +1,13 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { View, StyleSheet, Text, SafeAreaView, Button, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements/dist/icons/Icon'
 import * as Animatable from 'react-native-animatable';
 import Timeline from 'react-native-timeline-flatlist'
 
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsSignIn, selectMemberName, selectTableID, selectScreenState } from '../../../redux/slices/memberSlice';
+import { useSelector} from 'react-redux';
+import { selectTableID, selectScreenState } from '../../../redux/slices/memberSlice';
 import { selectMemberID } from '../../../redux/slices/memberSlice';
 
 

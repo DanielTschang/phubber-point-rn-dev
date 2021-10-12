@@ -1,13 +1,11 @@
-import { View, Text, Dimensions, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 
 import { FontAwesome, Feather } from '@expo/vector-icons';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
-import { Icon } from 'react-native-elements/dist/icons/Icon'
+
 import * as Animatable from 'react-native-animatable';
-import { background, style } from 'styled-system';
 import { StatusBar } from 'expo-status-bar';
 import { useDispatch } from 'react-redux';
 import { setMemberAccount ,setIsSignIn, setMemberID, setMemberName, setMemberPoint, setMemberPwd } from '../../redux/slices/memberSlice';
